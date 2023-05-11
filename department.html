@@ -1,0 +1,98 @@
+<html>
+<head>
+    <title>demo</title>
+</head>
+<body>
+    <form>
+        <div>
+            <input type="checkbox" index="0" />
+            <label value="1">星河一三四</label>
+        </div>
+        <div>
+            <input type="checkbox" index="1" />
+            <label value="2">星河二</label>
+        </div>
+        <div>
+            <input type="checkbox" index="2" />
+            <label value="3">天伦一</label>
+        </div>
+        <div>
+            <input type="checkbox" index="3" />
+            <label value="4">天伦四</label>
+        </div>
+        <div>
+            <input type="checkbox" index="4" />
+            <label value="5">风行一</label>
+        </div>
+        <div>
+            <input type="checkbox" index="5" />
+            <label value="6">风行三</label>
+        </div>
+        <div>
+            <input type="checkbox" index="6" />
+            <label value="7">大唐部</label>
+        </div>
+        <div>
+            <input type="checkbox" index="7" />
+            <label value="8">欧洲部</label>
+        </div>
+        <div>
+            <input type="checkbox" index="8" />
+            <label value="9">星悦团队</label>
+        </div>
+        <div>
+            <button type="button" name="SelectAll">全选</button>
+            <button type="button" name="SelectNone">全不选</button>
+            <button type="button" name="Submit">提交</button>
+        </div>
+    </form>
+    <script type="text/javascript">
+        var SelectAllBtn = document.getElementsByTagName("button")['SelectAll'];
+        var SelectNoneBtn = document.getElementsByTagName("button")['SelectNone'];
+        var SubmitBtn = document.getElementsByTagName("button")['Submit'];
+        var CheckBox = document.getElementsByTagName("input");
+        var Label = document.getElementsByTagName("label");
+
+        var arr = [];
+        // 全选
+        SelectAllBtn.onclick = function () {
+            arr = [];
+            for (var i = 0; i < CheckBox.length; i++) {
+                CheckBox[i].checked = true;
+                arr.push(Label[i].attributes["value"].value);
+            }
+        }
+
+        // 取消全选
+        SelectNoneBtn.onclick = function () {
+            arr = [];
+            for (var i = 0; i < CheckBox.length; i++) {
+                CheckBox[i].checked = false;
+            }
+        }
+
+        // 提交
+        SubmitBtn.onclick = function () {
+            Post();
+        }
+
+        for (var i = 0; i < CheckBox.length; i++) {
+            CheckBox[i].addEventListener('change', function (event) {
+                var index = event.target.attributes['index'].value;
+                var value = Label[index].attributes["value"].value;
+                var ArrIndex = arr.findIndex((item) => item === value);
+                if (event.target.checked) {
+                    arr.push(value);// 添加元素
+                } else {
+                    arr.splice(ArrIndex, 1);// 删除元素
+                }
+            });
+        }
+
+        // 提交到后端
+        function Post() {
+            console.log(arr);
+        }
+    </script>
+</body>
+</html>
