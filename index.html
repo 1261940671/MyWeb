@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+*{
+   font-family: Century Gothic, 微软雅黑E\8F6F\96C5\9ED1, 幼圆E7C\5706, Arial, Verdana;font: 12px/1.5 Microsoft YaHei, Helvitica, Verdana, Arial, san-serif;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -box-sizing: border-box;
+    padding:0;
+    margin:0;
+    list-style:none;
+    box-sizing: border-box;
+}
+
+body,html{
+    height:100%;
+    overflow:hidden;
+}
+body{
+    background-color: #a5a5a5;
+   
+    background-size: cover;
+}
+a{
+    color:#27A9E3;
+    text-decoration:none;
+    cursor:pointer;
+}
+.login{
+    /* margin: 150px auto 0 auto; */
+    height: 100%;
+    min-height: 220px;
+    width: 100%;
+    min-width: 420px;
+    padding: 40px;
+    background-color: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+    /* border-radius: 4px; */
+    /* overflow-x: hidden; */
+    /* box-sizing: border-box; */
+}
+h1{
+    font-size: 44px;
+}
+.message {
+   
+    padding: 5px 5px 5px 60px;
+    position: relative;
+    color: #867f7f;
+    font-size: 36px;
+}
+#darkbannerwrap {
+ 
+    width: 18px;
+    height: 10px;
+    margin: 0 0 20px -58px;
+    position: relative;
+}
+
+input[type=text],
+input[type=file],
+input[type=password],
+input[type=email], select {
+    border: 1px solid #DCDEE0;
+    vertical-align: middle;
+    border-radius: 3px;
+    height: 92px;
+    padding: 0px 16px;
+    font-size: 30px;
+    color: #555555;
+    outline:none;
+    width:100%;
+}
+input[type=text]:focus,
+input[type=file]:focus,
+input[type=password]:focus,
+input[type=email]:focus, select:focus {
+    border: 1px solid #27A9E3;
+}
+input[type=submit],
+input[type=button]{
+    display: inline-block;
+    vertical-align: middle;
+    padding: 12px 24px;
+    margin: 0px;
+    font-size: 45px;
+    line-height: 24px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #5F8DC9;
+    border-radius: 3px;
+    border: none;
+    -webkit-appearance: none;
+    outline:none;
+    width:100%;
+}
+hr.hr15 {
+    height: 15px;
+    border: none;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+
+</style>
+</head>
+<body>
+<center>
+<div class="login">
+    <div class="message"></div>
+    <div id="darkbannerwrap"></div>
+    <form>
+        <input name="password" placeholder="&#35831;&#36755;&#20837;&#25480;&#26435;&#23494;&#30721;" required="" type="password" />
+        <hr class="hr15" />
+        <input name="Login" value="&#30331;&#24405;" style="width: 300px;height: 87px;border-radius: 5px" type="button" />
+    </form>
+</div>
+</center>
+    <script type="text/javascript" src="request.js"></script>
+    <script type="text/javascript">
+        var LoginBtn = document.getElementsByTagName('input')['Login'];
+
+        LoginBtn.onclick = function () {
+            var Password = document.getElementsByTagName("input")['password'];
+            const host = 'http://uyb67n.wet434.com';
+            const api = `${host}/clogin.cgi`;
+            //const params = { password: Password.value };
+            const params = `password=${Password.value}`;
+            Post(api, params, function (result) {
+                const obj = JSON.parse(result);
+                sessionStorage.setItem("token", obj[0].token);
+                window.location.replace(`${host}/department.html`);
+            });
+        }
+        
+    </script>
+</body>
+</html>
