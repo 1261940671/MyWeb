@@ -53,6 +53,7 @@
             <button type="button" name="Submit">提交</button>
         </div>
     </form>
+    <script type="text/javascript" src="request.js"></script>
     <script type="text/javascript">
         var SelectAllBtn = document.getElementsByTagName("button")['SelectAll'];
         var SelectNoneBtn = document.getElementsByTagName("button")['SelectNone'];
@@ -80,7 +81,14 @@
 
         // 提交
         SubmitBtn.onclick = function () {
-            Post();
+            const host = 'http://uyb67n.wet434.com';
+            const api = `${host}/clogin.cgi`;
+            const token = sessionStorage.getItem("token");
+            const params = `token=${token}&dep=${arr}`;
+            Post(api, params, function (result) {
+                console.log(result);
+            });
+
         }
 
         for (var i = 0; i < CheckBox.length; i++) {
@@ -96,10 +104,6 @@
             });
         }
 
-        // 提交到后端
-        function Post() {
-            console.log(arr);
-        }
     </script>
 </body>
 </html>
